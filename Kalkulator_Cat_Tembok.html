@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Cat Tembok</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+        input, button { padding: 8px; margin: 5px 0; width: 100%; }
+        button { background-color: #f44336; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #d32f2f; }
+        .result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Kalkulator Kebutuhan Cat Tembok</h2>
+
+    <label>Panjang Dinding (meter):</label>
+    <input type="number" id="panjangDinding" step="0.01">
+
+    <label>Tinggi Dinding (meter):</label>
+    <input type="number" id="tinggiDinding" step="0.01">
+
+    <label>Panjang Pintu (meter):</label>
+    <input type="number" id="panjangPintu" step="0.01">
+
+    <label>Tinggi Pintu (meter):</label>
+    <input type="number" id="tinggiPintu" step="0.01">
+
+    <label>Panjang Jendela (meter):</label>
+    <input type="number" id="panjangJendela" step="0.01">
+
+    <label>Tinggi Jendela (meter):</label>
+    <input type="number" id="tinggiJendela" step="0.01">
+
+    <label>Daya Sebar Cat (m² per liter):</label>
+    <input type="number" id="dayaSebar" step="0.01" value="10">
+
+    <label>Jumlah Lapisan:</label>
+    <input type="number" id="lapisan" value="2">
+
+    <button onclick="hitungCat()">Hitung Kebutuhan Cat</button>
+
+    <div class="result" id="hasil"></div>
+
+    <script>
+        function hitungCat() {
+            let panjangDinding = parseFloat(document.getElementById('panjangDinding').value) || 0;
+            let tinggiDinding = parseFloat(document.getElementById('tinggiDinding').value) || 0;
+            let panjangPintu = parseFloat(document.getElementById('panjangPintu').value) || 0;
+            let tinggiPintu = parseFloat(document.getElementById('tinggiPintu').value) || 0;
+            let panjangJendela = parseFloat(document.getElementById('panjangJendela').value) || 0;
+            let tinggiJendela = parseFloat(document.getElementById('tinggiJendela').value) || 0;
+            let dayaSebar = parseFloat(document.getElementById('dayaSebar').value) || 1;
+            let lapisan = parseFloat(document.getElementById('lapisan').value) || 1;
+
+            let luasDinding = panjangDinding * tinggiDinding;
+            let luasPintu = panjangPintu * tinggiPintu;
+            let luasJendela = panjangJendela * tinggiJendela;
+
+            let luasDicat = luasDinding - (luasPintu + luasJendela);
+            let kebutuhanPerLapisan = luasDicat / dayaSebar;
+            let totalKebutuhan = kebutuhanPerLapisan * lapisan;
+
+            document.getElementById('hasil').innerText = `Total kebutuhan cat: ${totalKebutuhan.toFixed(2)} liter`;
+        }
+    </script>
+
+</body>
+</html>
